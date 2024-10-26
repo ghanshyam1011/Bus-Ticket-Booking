@@ -1,0 +1,86 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global Styles */
+body, html {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/static/group-buses-driving-along-road-sunset.jpg'); /* background image */
+    background-size: cover;
+    color: #fff;
+}
+
+/* Container for forms */
+.container {
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for contrast */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    position: relative; /* To allow for the pseudo-element */
+    overflow: hidden; /* Ensure no overflow */
+}
+
+/* Blur effect on the container */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    filter: blur(8px); /* Blur effect */
+    z-index: -1; /* Behind other content */
+}
+
+/* Text styles */
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+form input[type="text"],
+form input[type="password"],
+form button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    background: #fff;
+    color: #000;
+}
+
+form button {
+    background: #5cb85c; /* Primary button color */
+    color: #fff;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #4cae4c; /* Darker shade on hover */
+}
+
+/* Link styles */
+a {
+    color: #5cb85c; /* Color for links */
+    text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+    .container {
+        width: 90%; /* Adjust width for smaller screens */
+    }
+}

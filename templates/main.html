@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for the navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.5); /* Reduced opacity */
+            position: fixed; /* Fix it to the top */
+            width: 100%; /* Full width */
+            top: 0; /* Stick to the top */
+            left: 0; /* Align to the left */
+            padding: 10px; /* Padding for the navbar */
+            z-index: 1000; /* Above other content */
+            display: flex; /* Flexbox for layout */
+            justify-content: space-between; /* Space between items */
+            align-items: center; /* Center items vertically */
+        }
+
+        .navbar .company {
+            display: flex; /* Flexbox for logo and name */
+            align-items: center; /* Center logo and name */
+        }
+
+        .navbar img {
+            height: 40px; /* Adjust logo height */
+            margin-right: 10px; /* Space between logo and name */
+        }
+
+        .navbar a {
+            color: #fff; /* Text color */
+            margin: 0 15px; /* Margin between links */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .navbar a:hover {
+            color: #5cb85c; /* Change color on hover */
+        }
+
+        .hidden {
+            top: -60px; /* Hide the navbar */
+        }
+
+        .container {
+            margin-top: 60px; /* Space for the navbar */
+            text-align: center; /* Center text in the container */
+        }
+
+        .welcome-message {
+            margin-top: 10px; /* Space between navbar and welcome message */
+            font-size: 1.1em; /* Increase font size */
+            text-align: center; /* Center align the message */
+            width: 100%; /* Make it wide */
+            color: #fff; /* White text color */
+        }
+
+        .logo{
+            width: 45px; /* Adjust size as needed */
+            height: 45px; /* Adjust size as needed */
+            border-radius: 90%; /* This makes the image round */
+            object-fit: fit; /* Ensures the image covers the area without distortion */
+        }
+    </style>
+</head>
+<body>
+    <div class="user-home">
+        <nav class="navbar" id="navbar">
+            <div class="company">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Company Logo" class="logo"> <!-- Add your logo here -->
+                <span>The Getaway Bus</span> <!-- Replace with your company name -->
+            </div>
+            <div>
+                <a href="/book-bus">Book Bus</a>
+                <a href="/my-bookings">My Bookings</a>
+                <a href="/profile">Profile</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <div class="welcome-message">
+                <h2>Welcome, {{ user }}!</h2>
+                <p>Ride the bus, dodge the fuss!</p> <!-- Company Name message -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for scrolling effect
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                navbar.classList.add('hidden');
+            } else {
+                // Scrolling up
+                navbar.classList.remove('hidden');
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

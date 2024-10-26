@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Route - User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for the navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.5); /* Reduced opacity */
+            position: fixed; /* Fix it to the top */
+            width: 100%; /* Full width */
+            top: 0; /* Stick to the top */
+            left: 0; /* Align to the left */
+            padding: 10px; /* Padding for the navbar */
+            z-index: 1000; /* Above other content */
+            display: flex; /* Flexbox for layout */
+            justify-content: space-between; /* Space between items */
+            align-items: center; /* Center items vertically */
+        }
+
+        .navbar .company {
+            display: flex; /* Flexbox for logo and name */
+            align-items: center; /* Center logo and name */
+        }
+
+        .navbar img {
+            height: 40px; /* Adjust logo height */
+            margin-right: 10px; /* Space between logo and name */
+        }
+
+        .navbar a {
+            color: #fff; /* Text color */
+            margin: 0 15px; /* Margin between links */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .navbar a:hover {
+            color: #5cb85c; /* Change color on hover */
+        }
+
+        .hidden {
+            top: -60px; /* Hide the navbar */
+        }
+
+        .container {
+            margin-top: 60px; /* Space for the navbar */
+            text-align: center; /* Center text in the container */
+            color: #fff; /* White text color */
+            width: 80%; /* Increased width */
+            margin-left: auto; /* Center container */
+            margin-right: auto; /* Center container */
+        }
+
+        .form-container {
+            margin-top: 20px; /* Space for the form */
+            width: 100%; /* Use full width of the container */
+        }
+
+        input[type="text"], input[type="time"], input[type="number"] {
+            width: 100%; /* Make input fields full width */
+            max-width: 400px; /* Set a max width for the inputs */
+            padding: 10px; /* Padding */
+            margin: 10px 0; /* Margin */
+            border: 1px solid #ccc; /* Border */
+            border-radius: 4px; /* Rounded corners */
+        }
+
+        input[type="submit"] {
+            background-color: #5cb85c; /* Submit button color */
+            color: white; /* Text color */
+            padding: 10px 15px; /* Padding */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4cae4c; /* Darker green on hover */
+        }
+
+        .logo {
+            width: 45px; /* Adjust size as needed */
+            height: 45px; /* Adjust size as needed */
+            border-radius: 90%; /* This makes the image round */
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+        }
+    </style>
+</head>
+<body>
+    <div class="user-home">
+        <nav class="navbar" id="navbar">
+            <div class="company">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Company Logo" class="logo"> <!-- Add your logo here -->
+                <span >The Getaway Bus</span> <!-- Replace with your company name -->
+            </div>
+            <div>
+                <a href="/admin">Home</a>
+                <a href="/view-route">View Routes</a> <!-- Link to view routes -->
+                <a href="/add-route" id="add-bus">Add Routes</a> <!-- Link to add routes -->
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <h2>Add a New Route</h2>
+            <p>Fill in the details below to add a new bus route.</p>
+            <div class="form-container">
+                <form action="/add-route" method="POST">
+                    <input type="text" name="bus_name" placeholder="Bus Name" required>
+                    <input type="text" name="route_name" placeholder="Route Name" required>
+                    <input type="time" name="departure_time" required>
+                    <input type="number" name="price" placeholder="Price" required step="0.01">
+                    <input type="submit" value="Add Route">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for scrolling effect
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                navbar.classList.add('hidden');
+            } else {
+                // Scrolling up
+                navbar.classList.remove('hidden');
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

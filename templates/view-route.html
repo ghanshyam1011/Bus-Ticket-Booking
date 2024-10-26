@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Routes - Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for the navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.5); /* Reduced opacity */
+            position: fixed; /* Fix it to the top */
+            width: 100%; /* Full width */
+            top: 0; /* Stick to the top */
+            left: 0; /* Align to the left */
+            padding: 10px; /* Padding for the navbar */
+            z-index: 1000; /* Above other content */
+            display: flex; /* Flexbox for layout */
+            justify-content: space-between; /* Space between items */
+            align-items: center; /* Center items vertically */
+        }
+
+        .navbar .company {
+            display: flex; /* Flexbox for logo and name */
+            align-items: center; /* Center logo and name */
+        }
+
+        .navbar img {
+            height: 40px; /* Adjust logo height */
+            margin-right: 10px; /* Space between logo and name */
+        }
+
+        .navbar a {
+            color: #fff; /* Text color */
+            margin: 0 15px; /* Margin between links */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .navbar a:hover {
+            color: #5cb85c; /* Change color on hover */
+        }
+
+        .hidden {
+            top: -60px; /* Hide the navbar */
+        }
+
+        .container {
+            margin-top: 60px; /* Space for the navbar */
+            text-align: center; /* Center text in the container */
+            color: #fff; /* White text color */
+            width: 80%; /* Increased width */
+            margin-left: auto; /* Center container */
+            margin-right: auto; /* Center container */
+        }
+
+        .form-container {
+            margin-top: 20px; /* Space for the form */
+            width: 100%; /* Use full width of the container */
+        }
+
+        input[type="text"], input[type="time"], input[type="number"] {
+            width: 100%; /* Make input fields full width */
+            max-width: 400px; /* Set a max width for the inputs */
+            padding: 10px; /* Padding */
+            margin: 10px 0; /* Margin */
+            border: 1px solid #ccc; /* Border */
+            border-radius: 4px; /* Rounded corners */
+        }
+
+        input[type="submit"] {
+            background-color: #5cb85c; /* Submit button color */
+            color: white; /* Text color */
+            padding: 10px 15px; /* Padding */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4cae4c; /* Darker green on hover */
+        }
+
+        .logo {
+            width: 45px; /* Adjust size as needed */
+            height: 45px; /* Adjust size as needed */
+            border-radius: 90%; /* This makes the image round */
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+        }
+
+        table {
+            width: 100%; /* Full width for the table */
+            border-collapse: collapse; /* Remove gaps between cells */
+            margin-top: 20px; /* Space between title and table */
+        }
+
+        th, td {
+            padding: 15px; /* Padding inside cells */
+            text-align: left; /* Align text to the left */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Light border for separation */
+            border-right: 1px solid rgba(255, 255, 255, 0.5); /* Vertical line */
+        }
+
+        /* Remove right border for the last column */
+        td:last-child, th:last-child {
+            border-right: none;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.2); /* Header background */
+            color: #fff; /* Header text color */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="user-home">
+        <nav class="navbar" id="navbar">
+            <div class="company">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Company Logo" class="logo"> 
+                <span>The Getaway Bus</span> 
+            </div>
+            <div>
+                <a href="/admin">Home</a>
+                <a href="/view-route">View Routes</a> 
+                <a href="/add-route">Add Routes</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <h2>View Routes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Route Name</th>
+                        <th>Bus Name</th>
+                        <th>Departure Time</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for route in routes %}
+                    <tr>
+                        <td>{{ route[1] }}</td>
+                        <td>{{ route[2] }}</td>
+                        <td>{{ route[3] }}</td>
+                        <td>{{ route[4] }}</td>
+                        <td>
+                            <form action="{{ url_for('delete_route', route_id=route[0]) }}" method="POST">
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this route?');">✖</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
