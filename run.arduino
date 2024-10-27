@@ -1,0 +1,15 @@
+/bus_ticket_booking/
+│
+├── app.py
+├── bus_ticket_booking.db
+├── templates/
+│   ├── login.html
+│   ├── signup.html
+│   ├── main.html
+│   ├── admin.html
+│   ├── view-route.html
+│   ├── add-route.html
+│   ├── book-bus.html
+│   └── available-seats.html
+└── static/
+    └── styles.css  # (optional, if you have any custom styles)
