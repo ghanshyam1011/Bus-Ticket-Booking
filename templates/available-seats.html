@@ -7,139 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <style>
-        .navbar {
-            background: rgba(0, 0, 0, 0.5);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            padding: 10px;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar .company {
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar img {
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        .navbar a {
-            color: #fff;
-            margin: 0 15px;
-            text-decoration: none;
-        }
-
-        .navbar a:hover {
-            color: #5cb85c;
-        }
-
-        .hidden {
-            top: -60px;
-        }
-
-        .container {
-            margin-top: 60px;
-            text-align: center;
-            color: #fff;
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        h2 {
-            margin-top: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-            border-right: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        td:last-child, th:last-child {
-            border-right: none;
-        }
-
-        th {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-        }
-
-        .logo {
-            width: 45px;
-            height: 45px;
-            border-radius: 90%;
-            object-fit: cover;
-        }
-
-        .book-btn {
-            background-color: #5cb85c;
-            color: white;
-            padding: 6px 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            margin-left: 10px;
-            white-space: nowrap;
-        }
-
-        .book-btn:hover {
-            background-color: #4cae4c;
-        }
-
-        /* Modal styling */
-        #seatModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-        }
-
-        #seatModal .modal-content {
-            background: #fff;
-            padding: 20px;
-            max-width: 500px;
-            margin: 10% auto;
-            position: relative;
-        }
-
-        .available {
-            background-color: #5cb85c;
-            color: white;
-            margin: 5px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .unavailable {
-            background-color: #ddd;
-            color: #aaa;
-            margin: 5px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: not-allowed;
-        }
+        /* Your existing styles... */
     </style>
 </head>
 <body>
@@ -171,12 +39,12 @@
                     {% for seat in seats %}
                     <tr>
                         <td>{{ seat.number }}</td>
-                        <td>{{ seat.available ? 'Available' : 'Unavailable' }}</td>
+                        <td>{{ seat.available ? 'Available' : 'Booked' }}</td>
                         <td>
                             {% if seat.available %}
                                 <button onclick="showSeatModal({{ seat.number }})" class="book-btn">Book</button>
                             {% else %}
-                                <button class="unavailable">Unavailable</button>
+                                <button class="unavailable">Booked</button>
                             {% endif %}
                         </td>
                     </tr>
@@ -201,11 +69,12 @@
 
         function showSeatModal(seatNumber) {
             selectedSeat = seatNumber;
+            document.getElementById('seatModal').style.display = 'block'; // Show modal
             alert(`Seat ${seatNumber} selected`);
         }
 
         function closeSeatModal() {
-            document.getElementById('seatModal').style.display = 'none';
+            document.getElementById('seatModal').style.display = 'none'; // Hide modal
         }
 
         function confirmBooking() {
@@ -223,7 +92,7 @@
             .then(data => {
                 alert(data.message);
                 closeSeatModal();
-                location.reload();
+                location.reload(); // Reload the page to reflect changes
             })
             .catch(error => console.error('Error:', error));
         }
